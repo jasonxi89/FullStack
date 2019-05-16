@@ -1,0 +1,23 @@
+Path: "/api/users/"
+
+DataSchema:        
+    fname : { type: String ,required: true},                    
+    lname : { type: String ,required: true}, 
+    pwd: {type: String ,required: true},                        
+    age: {type: Number ,required: true},                        
+    sex: {type:String ,required: true },
+
+
+Function: 
+1.Method:Get, Path:"/"  Find all users
+2.Method:Get, Path:"/:id" Use ID find single user
+3.Method:Put, Path:"/:id" Find the user ID and update the information 
+              Status: 999: No User Finded
+                      666: Updated Successful
+4.Method: Post, Path"/" Add new users to database
+                Status:666:Updated Successful
+                       777:Try Again. Some Error.
+
+5.Method: Delete, Path:"/:id" Delete users to database.
+                Status: 555 Failed. Try Again Later.
+                        666 Deteled Successful

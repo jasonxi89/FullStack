@@ -3,102 +3,86 @@ var User = require("./Userschema.js");
 
 
 //get all data
-function findall() {
-    // User.find({},(err,arr) =>{
-    //     if (err) return handleError(err);
-    //     if(arr) return arr;
-    //   })
-    User.find({}).then(function (users) {
-        return users;
-        });
+
+function handleError(err){
+    console.log("Error:" + err);
+    res.send('Err'+err)
 }
 
+function findall(res) {
+    User.find((err,users)=>{
+        if(err) handleError(err);
+        res.json(users)
+    });
+}
+
+function find(id,res){
+    User.findById(id,(err,user)=>{
+        if(err) handleError(err);
+        res.json(user);
+    })
+}
 
 //insert data
-function insert (fname,lname,pwd,age,sex){
+function insert (data,res){
     var user = new User({
-        fname : fname,                
-        lname: lname,
-        pwd: pwd,                           
-        age: age,                               
-        sex: sex,
+        fname : data.fname,                
+        lname: data.lname,
+        pwd: data.pwd,                           
+        age: data.age,                               
+        sex: data.sex,
     });
-    user.save(function (err, res) {
-
-        if (err) {
-            console.log("Error:" + err);
-        }
+    user.save(function (err, result) {
+        if (err) handleError(err);
         else {
-            console.log("Res:" + res);
+            res.sendStatus(666)
         }
     });
 }
 
-
-// function findpromise(id){
-//     return User.findById(id).then((res)=>{
-//         return res;}
-//     ).catch((error) => {
-//         console.log(error);
-//     })
-// }
-
-
-// //find user by id
-// async function findasyn(id) {
-//     return await User.findById(id,(err,user)=>{
-//     if (err) return err;
-//     if (user) {
-//         return user;}
-// })}
-
-
 //updated user by id
-function update(id,fname,lname,pwd,age,sex){
+function update(id, data, res){
+    console.log(id)
+    console.log(data)
+
     User.findByIdAndUpdate(id,{
-        fname:fname,
-        lname:lname,
-        pwd:pwd,
-        age:age,
-        sex:sex
+        fname:data.fname,
+        lname:data.lname,
+        pwd:data.pwd,
+        age:data.age,
+        sex:data.sex
     },(err,user)=>{
-        if (err) throw err;
-        if (!user) console.log("Some error happened. Please Refresh Page and Try again!")
-        else{console.log("updated request submitted successful!")}
+        if (err) handleError(err);
+        if (!user){res.sendStatus(999)}
+        else{ res.sendStatus(666) }
     })
 }
 
 
 //delete user and check if successful deleted
-function del(id){
+function del(id, res){
     User.findByIdAndDelete(id,(err)=>{
-        if (err) throw err;
+        if (err) handleError(err);
     })
     User.findById(id,(err,user)=>{
         if (err) throw err;
-        if (!user) console.log("Successful Deleted")
-        else console.log("Failed! Please Try Again")
+        if (!user) res.sendStatus(666);
+        else res.sendStatus(555);
     })
 }
 
-function test(id){
-    return id
+
+
+module.exports = {
+    find,     //find one
+    findall,  //find all
+    insert,   //insert
+    update,   //update
+    del,      //delete
+    // test,
+    // findasyn,
+    // findpromise,
+
 }
-
-User.find((err,res)=>{
-    console.log(res);
-});
-
-// module.exports = {
-//     //find,     //find one
-//     findall,  //find all
-//     insert,   //insert
-//     update,   //update
-//     del,      //delete
-//     test,
-//     // findasyn,
-//     // findpromise,
-
-// }
 
 
