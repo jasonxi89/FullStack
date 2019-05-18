@@ -6,6 +6,16 @@ var User = require("./mongodb/Userschema.js");
 const bodyParser = require('body-parser');
 router.use(bodyParser.json());
 
+router.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    );
+    next();
+  });
+  
 
 router.get('/',(req,res)=>{
     func.findall(res)
