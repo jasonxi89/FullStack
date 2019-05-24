@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+// const app = express();
 var func = require("./mongodb/func.js");
 var User = require("./mongodb/Userschema.js");
 const bodyParser = require('body-parser');
