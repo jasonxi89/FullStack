@@ -17,25 +17,42 @@ router.use(function(req, res, next) {
   });
   
 
-// router.get('/',(req,res)=>{
-//     func.findall(res)
-// })
+router.get('/',(req,res)=>{
+    func.findall(req.query.page,res)
+})
 
 router.post('/',(req,res)=>{
     func.insert(req.body, res)
 })
 
-// router.get('/:id',(req,res)=>{
-//     func.find(req.params.id,res)
-// })
+router.get('/dr/:id',(req,res)=>{
+    func.findDr(req.params.id,res)
+})
+
+router.get('/validmanager/:id',(req,res)=>{
+    func.validmanager(req.params.id,res)
+})
+
+router.get('/validmanager/',(req,res)=>{
+    func.validmanager(req.params.id,res)
+})
+
+
+router.get('/detail/:id',(req,res)=>{
+    func.find(req.params.id,res)
+})
+
+router.get('/Drnum/:id',(req,res)=>{
+    func.findDrnum(req.params.id,res)
+})
 
 // router.put('/:id',(req,res)=>{
 //     func.update(req.params.id, req.body, res)
 // })
 
-// router.delete('/:id',(req,res)=>{
-//     func.del(req.params.id,res)
-// })
+router.delete('/:id',(req,res)=>{
+    func.del(req.params.id,res)
+})
 
 
 

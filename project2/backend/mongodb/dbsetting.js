@@ -1,6 +1,9 @@
 //connect info
 
 const mongoose = require('mongoose');
+// var bluebird = require('bluebird');
+// mongoose.Promise=bluebird;
+mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
 const db = mongoose.connection;
 
