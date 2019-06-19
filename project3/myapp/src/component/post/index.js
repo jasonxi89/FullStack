@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 const imgscrCom ="https://s3.amazonaws.com/temp-for-interview/design_images/misc/comment.png";
 const imgscrCrown ="https://s3.amazonaws.com/temp-for-interview/design_images/misc/crown.png";
 const imgscrLikeEm ="https://s3.amazonaws.com/temp-for-interview/design_images/misc/like-empty.png";

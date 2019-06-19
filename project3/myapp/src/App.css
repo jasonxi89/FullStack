@@ -22,7 +22,6 @@
   border-radius: 5px;
   border: solid 1px #f0f0f1;
   /* background-color:green; */
-  padding: 11px 10px 11px 11px;
   display: inline-block;
   margin-bottom: 36px;
   margin-right:36px;
@@ -94,8 +93,8 @@
 }
 .first-mid-post-container-btn img{
   /* background-color: yellow; */
-  height: 23px;
-  width: 22px;
+  height: 21px;
+  width: 20px;
   display: inline-block;
 }
 
