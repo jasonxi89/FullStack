@@ -14,14 +14,11 @@ class App extends Component {
   render(){
 
   const {postList, users, currentuserliked} = this.props;
-    // console.log(postList)
-    // console.log(users)
-    // console.log(currentuserliked)
   return (
     <div className="web-container">
         {postList.map((post, index)=>{
           return(
-            <Post key={index} user={users.filter(user => user.id === post.user)[0]} likeClick={this.props.likeClick(index)} post={post} liked={currentuserliked.includes(index)} />
+            <Post key={index} user={users.filter(user => user.id === post.user)[0]} likeClick={this.props.handlelikeClick(index)} post={post} liked={currentuserliked.includes(index)} />
           )
         })}
     </div>
@@ -43,7 +40,7 @@ const mapDispatchToProps = dispatch => {
     getPostList: () => {
       dispatch(getData());
     },
-    likeClick:(id) =>{
+    handlelikeClick:(id) =>{
       dispatch(likeClick(id));
     }
   };

@@ -14,7 +14,7 @@ class App extends Component{
         }
     }
     handleClick = ()=> {
-        // this.props.likeClick();
+        // this.props.handlelikeClick();
         this.setState({liked:!this.state.liked})
     }
     render(){
