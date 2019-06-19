@@ -49,7 +49,7 @@ class App extends Component{
                         <div className ="comment">{this.props.post.title}</div>
                     </div>
                     <div className="post-container-likecomts">
-                        {this.props.post.likes} likes, {this.props.post.comments} comments.
+                        {this.props.post.likes} likes, {this.props.post.comments} comments
                     </div>
             </div>
         );}else{
