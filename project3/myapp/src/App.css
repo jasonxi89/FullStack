@@ -1,0 +1,181 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+.web-container{
+  display: flexbox;
+  margin: auto;
+  width: 1440px;
+  height: 1400px;
+  background-color: #f4f4f4;
+  /* background-color: red; */
+  padding-top: 43px;
+  padding-left:124px;
+}
+
+
+.post-container{
+  background-color: #ffffff;
+  width: 271px;
+  height: 412px;
+  border-radius: 5px;
+  border: solid 1px #f0f0f1;
+  /* background-color:green; */
+  padding: 11px 10px 11px 11px;
+  display: inline-block;
+  margin-bottom: 36px;
+  margin-right:36px;
+}
+
+.avatar{
+  margin-left: 5px;
+  height: 48px;
+  width: 48px;
+  /* background-color: blue; */
+}
+.top-post-container{
+  display: flex;
+  align-items:center;
+}
+.post-top-right{
+  width: 100%;
+  padding: 3px;
+
+}
+.post-user{
+  text-transform: capitalize;
+  /* background-color: aqua; */
+  display: inline-block;
+  width: 100%;
+  height: 16px;
+  font-family: Arial;
+  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000000;
+}
+.login-time{
+  /* background-color: brown; */
+  margin-top:2px;
+  height: 14px;
+  width: 100%;
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #a2a2a2;
+}
+.mid-post-container{
+  width: 250px;
+  height: 250px;
+  /* background-color: yellow; */
+  margin: 5px 10px 1px 11px;
+  object-fit: contain;
+}
+
+.mid-post-container-btn{
+  height: 21px;
+  /* background-color: pink; */
+  width: 100%;
+  display: flexbox;
+  justify-content: center;
+  margin: 11px 0 17px 11px;
+}
+.first-mid-post-container-btn{
+  /* background-color: yellow; */
+  display: inline-block;
+}
+.first-mid-post-container-btn img{
+  /* background-color: yellow; */
+  height: 23px;
+  width: 22px;
+  display: inline-block;
+}
+
+.second-mid-post-container-btn{
+  /* background-color: red; */
+  height: 21px;
+  width: 20px;
+  display: inline-block;
+  margin-left: 14px;
+  margin-right: 16px;
+}
+.third-mid-post-container-btn{
+  /* background-color: purple; */
+  height: 22px;
+  width: 21px;
+  display: inline-block;
+}
+.post-container-commment{
+  margin-left: 11px;
+  width: auto;
+  height: 17px;
+  padding: 0px;
+  /* background-color: yellow; */
+}
+.comment-user-name{
+  margin-left: 0px;
+  margin-top: 0px;
+  width: 39px;
+  height: 17px;
+  font-family: Arial;
+  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000000;
+  /* background-color: red; */
+  display: inline-table;
+  float: left;
+}
+.comment{
+  margin-top: 0px;
+  width: 200px;
+  height: 17px;
+  font-family: Arial;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000000;
+  word-break: keep-all;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* background-color: aqua; */
+  display: inline-block;
+}
+.post-container-likecomts{
+  margin-left: 11px;
+  margin-top:7px;
+  width: 242px;
+  height: 14px;
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #979797;
+  /* background-color:yellow; */
+}
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
