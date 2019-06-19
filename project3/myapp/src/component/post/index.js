@@ -14,6 +14,7 @@ class App extends Component{
         }
     }
     handleClick = ()=> {
+        // this.props.likeClick();
         this.setState({liked:!this.state.liked})
     }
     render(){
@@ -53,7 +54,6 @@ class App extends Component{
                     </div>
             </div>
         );}else{
-            console.log("hello")
             return(
                 <div>isLoading</div>
             )

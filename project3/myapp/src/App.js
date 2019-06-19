@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 // import { getList } from "./redux/actions"
 import Post from './component/post'
 import './App.css';
-import { getData } from './redux/actions';
+import { getData, likeClick} from './redux/actions';
 
 class App extends Component {
 
@@ -21,7 +21,7 @@ class App extends Component {
     <div className="web-container">
         {postList.map((post, index)=>{
           return(
-            <Post key={index} user={users.filter(user => user.id === post.user)[0]} post={post} liked={currentuserliked.includes(index)} />
+            <Post key={index} user={users.filter(user => user.id === post.user)[0]} likeClick={this.props.likeClick(index)} post={post} liked={currentuserliked.includes(index)} />
           )
         })}
     </div>
@@ -42,6 +42,9 @@ const mapDispatchToProps = dispatch => {
   return {
     getPostList: () => {
       dispatch(getData());
+    },
+    likeClick:(id) =>{
+      dispatch(likeClick(id));
     }
   };
 };

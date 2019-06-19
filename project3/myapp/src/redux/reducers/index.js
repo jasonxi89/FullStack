@@ -12,6 +12,22 @@ const initialState = {
   
   const reducer = (state = initialState, action) => {
     switch(action.type) {
+      case "GET_UPDATELIKE_REQUEST":
+        return {
+          ...state,
+          isLoading: true
+        };
+      case "GET_UPDATELIKE_SUCCESS":
+        return {
+          isLoading: false,
+          err: null
+        };
+      case "GET_UPDATELIKE_FAIL":
+        return {
+          ...state,
+          isLoading: false,
+          err: action.err
+        };
       case "GET_DATA_REQUEST":
         return {
           ...state,
