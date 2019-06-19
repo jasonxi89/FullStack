@@ -18,7 +18,7 @@ class App extends Component {
     <div className="web-container">
         {postList.map((post, index)=>{
           return(
-            <Post key={index} user={users.filter(user => user.id === post.user)[0]} likeClick={this.props.handlelikeClick(index)} post={post} liked={currentuserliked.includes(index)} />
+            <Post key={index} user={users.filter(user => user.id === post.user)[0]} likeClick={()=>this.props.handlelikeClick(index)} post={post} liked={currentuserliked.includes(index)} />
           )
         })}
     </div>

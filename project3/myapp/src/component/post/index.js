@@ -14,10 +14,11 @@ class App extends Component{
         }
     }
     handleClick = ()=> {
-        // this.props.handlelikeClick();
+        this.props.likeClick();
         this.setState({liked:!this.state.liked})
     }
     render(){
+        // console.log(this.props)
         if(this.props.user && this.props.post){
             // console.log(this.props)
         return (

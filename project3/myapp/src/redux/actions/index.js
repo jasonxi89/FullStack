@@ -46,6 +46,7 @@ return {
 
 export const likeClick = (id) =>{
   return(dispatch) =>{
+    console.log(id);
     dispatch(updateLikeRequest())
     //put or post depends on the Rest API setting
     axios.put(`http://somewebsite/api/${id}`)
