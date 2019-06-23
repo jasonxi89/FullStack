@@ -50,14 +50,14 @@ class App extends React.Component{
     constructor(props){
         super(props)
         this.state={
-            inputname:"123",
-            inputtitle:"123",
+            inputname:"",
+            inputtitle:"",
             sexinput:"female",
-            inputdate:"2019-03-17",
-            inputophone:"123",
-            inputcphone:"123",
-            inputsms:"123",
-            inputemail:"123@123.com",
+            inputdate:"",
+            inputophone:"",
+            inputcphone:"",
+            inputsms:"",
+            inputemail:"",
             inputmanager:"",
             uploadedFileCloudinaryUrl: '',
             isuploading:false,
@@ -65,18 +65,20 @@ class App extends React.Component{
     }
     handleSubmit = (e)=>{
         e.preventDefault();
+        console.log("---------")
+        console.log(this.props.match.params.id)
         // id,name,title,sex,sdate,ophone,cphone,sms,email,uploadedFileCloudinaryUrl,managerid,props
-        this.props.updateUser(this.props.id,
-                              this.state.inputname,
-                              this.state.inputtitle,
-                              this.state.sexinput,
-                              this.state.inputdate,
-                              this.state.inputophone,
-                              this.state.inputcphone,
-                              this.state.inputsms,
-                              this.state.inputemail,
-                              this.state.uploadedFileCloudinaryUrl,
-                              this.state.inputmanager,
+        this.props.updateUser(this.props.match.params.id,
+                              this.state.inputname?this.state.inputname:this.props.userDetail.data.name,
+                              this.state.inputtitle?this.state.inputtitle:this.props.userDetail.data.title,
+                              this.state.sexinput?this.state.sexinput:this.props.userDetail.data.sex,
+                              this.state.inputdate?this.state.inputdate:this.props.userDetail.data.sdate,
+                              this.state.inputophone?this.state.inputophone:this.props.userDetail.data.ophone,
+                              this.state.inputcphone?this.state.inputcphone:this.props.userDetail.data.cphone,
+                              this.state.inputsms?this.state.inputsms:this.props.userDetail.data.sms,
+                              this.state.inputemail?this.state.inputemail:this.props.userDetail.data.email,
+                              this.state.uploadedFileCloudinaryUrl?this.state.uploadedFileCloudinaryUrl:this.props.userDetail.data.uploadedFileCloudinaryUrl,
+                              this.state.inputmanager?this.state.inputmanager:this.props.userDetail.data.managerid.id,
                               this.props,
             )
     }

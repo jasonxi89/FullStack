@@ -46,9 +46,11 @@ router.get('/Drnum/:id',(req,res)=>{
     func.findDrnum(req.params.id,res)
 })
 
-// router.put('/:id',(req,res)=>{
-//     func.update(req.params.id, req.body, res)
-// })
+router.put('/:id',(req,res)=>{
+    // console.log(req.params.id)
+    // console.log(req.body)
+    func.update(req.params.id, req.body, res)
+})
 
 router.delete('/:id',(req,res)=>{
     func.del(req.params.id,res)

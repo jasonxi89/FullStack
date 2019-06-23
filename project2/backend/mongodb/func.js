@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 //get all data
 
 function handleError(err, res){
-    console.log("Error:" + err);
+    // console.log("Error:" + err);
     // res.json('Err'+err)
 }
 
@@ -20,7 +20,7 @@ function findall(page,res) {
     .limit(17)
     .sort({'_id':-1})
     .exec((err,users)=>{
-        console.log(users)
+        // console.log(users)
         if(err) handleError(err, res);
         res.json(users)
     });
@@ -91,7 +91,7 @@ function validmanager(id,res){
     if(!id){
         User.find({}, function(err, users) {
             var userMap = {};
-            console.log(users)
+            // console.log(users)
             users.forEach(function(user) {
               userMap[user._id] = user.name;
             });
@@ -130,24 +130,43 @@ function validmanager(id,res){
 
 //updated user by id
 function update(id,data,res){
-    User.findById(id).then((user)=>{
-        if(data.pwd != user.pwd){
-            res.sendStatus(403)
-        }else{
-
+        if(data.managerid){
+            console.log(data.managerid)
+            console.log("excited")
             User.findByIdAndUpdate(id,{
-                fname:data.fname,
-                lname:data.lname,
-                pwd:data.pwd,
-                age:data.age,
-                sex:data.sex
+                name:data.name,
+                title:data.title,
+                sdate:data.sdate,
+                sex:data.sex,
+                ophone:data.ophone,
+                cphone:data.cphone,
+                sms:data.sms,
+                email:data.email,
+                uploadedFileCloudinaryUrl:data.uploadedFileCloudinaryUrl,
+                managerid:data.managerid
             },(err,user)=>{
                 if (err) handleError(err, res);
                 if (!user){res.sendStatus(999)}
                 else{ res.sendStatus(200) }
-            })
-        }
+    })}else{
+            console.log(data.managerid)
+            console.log("not excited")
+            User.findByIdAndUpdate(id,{
+                name:data.name,
+                title:data.title,
+                sdate:data.sdate,
+                sex:data.sex,
+                ophone:data.ophone,
+                cphone:data.cphone,
+                sms:data.sms,
+                email:data.email,
+                uploadedFileCloudinaryUrl:data.uploadedFileCloudinaryUrl,
+            },{ new: true, overwrite: true },(err,user)=>{
+                if (err) handleError(err, res);
+                if (!user){res.sendStatus(999)}
+                else{ res.sendStatus(200)}
     })}
+}
     // User.findByIdAndUpdate(id,{
     //     fname:data.fname,
     //     lname:data.lname,
@@ -205,7 +224,7 @@ module.exports = {
     validmanager, //find valid manager
     findDr, //find number of dr.
     findDrnum, //find Dr Num
-    // update,   //update
+    update,   //update
     del,      //delete
     // test,
     // findasyn,

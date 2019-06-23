@@ -199,7 +199,7 @@ const getListRequest = () => {
   export const updateUser = (id,name,title,sex,sdate,ophone,cphone,sms,email,uploadedFileCloudinaryUrl,managerid,props) =>{
     return(dispatch) =>{
       dispatch(createUserRequest());
-      axios.post(`http://localhost:8888/api/users/${id}`,{
+      axios.put(`http://localhost:8888/api/users/${id}`,{
         name:name,
         title:title,
         sdate:sdate,
@@ -211,13 +211,15 @@ const getListRequest = () => {
         uploadedFileCloudinaryUrl:uploadedFileCloudinaryUrl,
         managerid:managerid
       }).then(res=> {
-        window.alert("Successfully Updated")
+        // window.alert("Successfully Updated")
         dispatch(createUserSuccess());
-        dispatch(getList())
+        props.history.push('/users/');
+        // dispatch(getList())
       }).catch(err => {
-        window.alert("Wrong Password!Update Failed!")
+        // window.alert("Wrong Password!Update Failed!")
         dispatch(createUserFail(err));
-        dispatch(getList());
+        props.history.push('/users/');
+        // dispatch(getList());
       });
     }
   }
