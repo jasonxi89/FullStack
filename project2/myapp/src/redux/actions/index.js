@@ -140,10 +140,10 @@ const getListRequest = () => {
       }).then(res=> {
         // window.alert("Successfully Created!")
         props.history.push('/users/');
-        createUserSuccess(res);
+        dispatch(createUserSuccess());
       }).catch(err => {
         props.history.push('/users/');
-        createUserFail(err)
+        dispatch(createUserFail(err));
 
       });
 
@@ -185,7 +185,7 @@ const getListRequest = () => {
       axios.delete(`http://localhost:8888/api/users/${id}`)
         .then(res => {
           dispatch(delUserSuccess(res));
-          props.history.push('/users/refresh');
+          props.history.push('/users/');
           dispatch(getList())
         })
         .catch(err => {
@@ -196,23 +196,50 @@ const getListRequest = () => {
     }
   }
 
-  export const updateDetail = (id,fname,lname,pwd,age,sex) =>{
+  export const updateUser = (id,name,title,sex,sdate,ophone,cphone,sms,email,uploadedFileCloudinaryUrl,managerid,props) =>{
     return(dispatch) =>{
       dispatch(createUserRequest());
-      axios.put(`http://localhost:8888/api/users/${id}`,{
-        fname:fname,
-        lname:lname,
-        pwd:pwd,
-        age:age,
-        sex:sex
+      axios.post(`http://localhost:8888/api/users/${id}`,{
+        name:name,
+        title:title,
+        sdate:sdate,
+        sex:sex,
+        ophone:ophone,
+        cphone:cphone,
+        sms:sms,
+        email:email,
+        uploadedFileCloudinaryUrl:uploadedFileCloudinaryUrl,
+        managerid:managerid
       }).then(res=> {
         window.alert("Successfully Updated")
-        createUserSuccess(res);
+        dispatch(createUserSuccess());
         dispatch(getList())
       }).catch(err => {
         window.alert("Wrong Password!Update Failed!")
-        createUserFail(err)
+        dispatch(createUserFail(err));
         dispatch(getList());
       });
     }
   }
+
+
+
+  //-----------------------------------------------------------
+
+export const editPageLoading = () => {
+    return{
+        type: "EDIT_LOADING"
+    }
+}
+export const editPageFail = (error) => {
+    return {
+        type: "EDIT_FAIL",
+        error: error
+    }
+}
+export const editInitSuccess = (data) => {
+    return {
+        type: "EDIT_SUCCESS",
+        data:data
+    }
+}

@@ -19,6 +19,7 @@ class Scroll2 extends Component {
     super(props);
     this.initialLoad = true;
     this.state = {
+      searchTextValue: "",
       hasMore: true,
       loading: false,
       pageNum: 0,
@@ -120,7 +121,6 @@ class Scroll2 extends Component {
               return
             }
             this.setState({data:this.state.data.concat(res.data),loading:false})
-            // console.log(this.state.data)
           })
           .catch(err => {
             console.log(err)
@@ -180,6 +180,6 @@ const mapDispatchToProps = dispatch =>{
   };
 }
     
-// export default Scroll2;
+
 export default connect(mapStateToProps, mapDispatchToProps)(Scroll2);
 
