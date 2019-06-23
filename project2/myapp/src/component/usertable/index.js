@@ -24,7 +24,7 @@ class Scroll2 extends Component {
       loading: false,
       pageNum: 0,
       data: [],
-
+      isLoading:false,
     };
   }
   // componentDidUpdate() {
@@ -53,9 +53,8 @@ class Scroll2 extends Component {
                 <th className='delete'></th>
               </tr>
             </thead>
-
+            {!this.state.isLoading?
             <tbody>
-            
               {this.state.data.map(person=>(
                 <tr key={person._id}>
                   <img className='ava' src={person.uploadedFileCloudinaryUrl?person.uploadedFileCloudinaryUrl:imgSrc} alt=""/>
@@ -63,8 +62,8 @@ class Scroll2 extends Component {
                   <td className='title'>{person.title}</td>
                   <td className='sex'>{person.sex}</td>
                   <td className='sdate'>{person.sdate}</td>
-                  <td className='ophone' style={{  color:"blue",cursor:"pointer"}} oonClick = {()=>window.open('tel:' + person.ophone)}>{person.ophone}</td>
-                  <td className='cphone' style={{  color:"blue",cursor:"pointer"}} oonClick = {()=>window.open('tel:' + person.cphone)}>{person.cphone}</td>
+                  <td className='ophone' style={{  color:"blue",cursor:"pointer"}} onClick = {()=>window.open('tel:' + person.ophone)}>{person.ophone}</td>
+                  <td className='cphone' style={{  color:"blue",cursor:"pointer"}} onClick = {()=>window.open('tel:' + person.cphone)}>{person.cphone}</td>
                   <td className='sms' style={{  color:"blue",cursor:"pointer"}} onClick = {()=>window.open('sms:' + person.sms)}>{person.sms}</td>
                   <td className='email' style={{  color:"blue",cursor:"pointer"}} onClick = {()=>window.open('mailto:' + person.email)}>{person.email}</td>
                   {person.managerid?<td className='manager' onClick={()=>this.handleManagerClick(person.managerid._id)}>{person.managerid.name}</td>:<td className='manager'></td>}
@@ -73,17 +72,35 @@ class Scroll2 extends Component {
                   <td className='delete' onClick={()=>this.handleDelete(person._id)}><i class="iconfont">&#xe795;</i>Delete</td>
                 </tr>
               ))}
-            </tbody>
+            </tbody>:<h2>isLoading...</h2>}
     </table>
     )
+  }
+  handleManagerClick=(id)=>{
+    // if(!id){return}
+    // console.log(id);
+    this.setState({isLoading:true})
+    axios.get(`http://localhost:8888/api/users/detail/${id}`)
+    .then(res => {
+      this.setState({data:[].concat(res.data),isLoading:false})
+    })
+  }
+
+  handleDRClick=(id)=>{
+    this.setState({isLoading:true})
+    axios.get(`http://localhost:8888/api/users//Drnum/${id}`)
+    .then(res=>{
+      this.setState({data:[].concat(res.data),isLoading:false})
+    })
   }
   handleEdit(id){
     this.props.history.push(`/users/${id}`)
   }
   async handleDelete(id){
+    this.setState({isLoading:true})
     await axios.delete(`http://localhost:8888/api/users/${id}`)
     .then(res => {
-      this.getData();
+      this.setState({data:[]},this.getData());
     })
     .catch(err => {
       // props.history.push('/users/');
@@ -97,14 +114,15 @@ class Scroll2 extends Component {
     this.initialData();
   }
   getData(){
+    this.setState({isLoading:true})
     axios
     .get(`http://localhost:8888/api/users/?page=0`)
     .then(res => {
       if(res.data.length < 20){
-        this.setState({data:res.data,hasMore:false})
+        this.setState({data:res.data,hasMore:false,isLoading:false})
         return
       }
-      this.setState({data:res.data,loading:false})
+      this.setState({data:res.data,loading:false,isLoading:false})
       // console.log(this.state.data)
     })
     .catch(err => {
@@ -129,17 +147,14 @@ class Scroll2 extends Component {
   
   loadMore(){
     if (this.state.loading) {
-      console.log("Test")
       return 
     }
     this.setState({
             loading: true,
             pageNum: this.state.pageNum + 1
         }, () => {
-          console.log("hello")
           this.initialData(this.state.pageNum)
         })
-    
   }
   
 

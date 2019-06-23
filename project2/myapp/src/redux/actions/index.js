@@ -168,7 +168,7 @@ const getListRequest = () => {
   export const getDetail = (id) => {
     return (dispatch) => {
       dispatch(getDetailRequest());
-      axios.get(`http://localhost:8888/api/users/${id}`)
+      axios.get(`http://localhost:8888/api/users/detail/${id}`)
         .then(res => {
           dispatch(getDetailSuccess(res.data));
         })
@@ -184,13 +184,13 @@ const getListRequest = () => {
       dispatch(delRequest());
       axios.delete(`http://localhost:8888/api/users/${id}`)
         .then(res => {
-          dispatch(delUserSuccess(res));
-          props.history.push('/users/');
+          dispatch(delUserSuccess());
+          // props.history.push('/users/');
           dispatch(getList())
         })
         .catch(err => {
           dispatch(delUserFail(err));
-          props.history.push('/users/');
+          // props.history.push('/users/');
           dispatch(getList())
         });
     }

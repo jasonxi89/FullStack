@@ -110,7 +110,7 @@ class App extends React.Component{
     }
 
     handleImageUpload(file) {
-        console.log("Uploading")
+        // console.log("Uploading")
         this.setState({isuploading:true})
         let upload = request.post(CLOUDINARY_UPLOAD_URL)
                             .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
@@ -134,7 +134,6 @@ class App extends React.Component{
     
     uploadPic = e =>{
         console.log("Here");
-        // console.log(e.target.files[0]);
         this.setState({isloading:true});
         this.handleImageUpload(e.target.files[0]);
     }
@@ -305,7 +304,6 @@ class App extends React.Component{
                     </div>
                 </div>
                 <Snackbar
-                        
                         anchorOrigin={{
                             vertical: 'bottom',
                             horizontal: 'center',
