@@ -63,10 +63,19 @@ class App extends React.Component{
             isuploading:false,
         }
     }
+
+    componentDidMount(){
+        // console.log(this.props.match.params.id)
+        this.props.getEmployeeDetail(this.props.match.params.id);
+        this.props.getManagerList(this.props.match.params.id);
+    }
     handleSubmit = (e)=>{
+
         e.preventDefault();
         console.log("---------")
+        // console.log(this.props)
         console.log(this.props.match.params.id)
+        // const id = this.props.match.params.id.toString()
         // id,name,title,sex,sdate,ophone,cphone,sms,email,uploadedFileCloudinaryUrl,managerid,props
         this.props.updateUser(this.props.match.params.id,
                               this.state.inputname?this.state.inputname:this.props.userDetail.data.name,
@@ -78,14 +87,11 @@ class App extends React.Component{
                               this.state.inputsms?this.state.inputsms:this.props.userDetail.data.sms,
                               this.state.inputemail?this.state.inputemail:this.props.userDetail.data.email,
                               this.state.uploadedFileCloudinaryUrl?this.state.uploadedFileCloudinaryUrl:this.props.userDetail.data.uploadedFileCloudinaryUrl,
-                              this.state.inputmanager?this.state.inputmanager:this.props.userDetail.data.managerid.id,
-                              this.props,
+                              this.state.inputmanager?this.state.inputmanager:
+                                                    this.props.userDetail.data.managerid?this.props.userDetail.data.managerid.id:"",
+                              this.props
             )
-    }
-    componentDidMount(){
-        console.log(this.props.match.params.id)
-        this.props.getEmployeeDetail(this.props.match.params.id);
-        this.props.getManagerList(this.props.match.params.id);
+        
     }
 
     handleImageUpload(file) {
@@ -136,6 +142,7 @@ class App extends React.Component{
     handleChange = (e) => {
         this.setState({inputmanager:e.target.value})
       }
+
     render(){
         const { userDetail} = this.props;
         // .forEach(key=>console.log(`key is ${key}, value is ${userDetail.manager[key]}`))
@@ -146,8 +153,8 @@ class App extends React.Component{
             <div className='add-ctn'>
                 {!this.props.userDetail.isLoading?
                     <div className='btn-ctn'>
-                        <h2>New Employee</h2>
-                        <button form="myform" type='submit' className='btn'><i class="iconfont">&#xe606;</i>Submit</button>
+                        <h2>Edit Employee</h2>
+                        <button form="myform"  type='submit' className='btn'><i class="iconfont">&#xe606;</i>Submit</button>
                         <button className='btn' onClick={()=>this.props.history.push('/users/')}><i class="iconfont">&#xe603;</i>Back</button>
                         <div className="info-ctn"> 
                             <div className='table-ctn'>
@@ -215,7 +222,7 @@ class App extends React.Component{
                                     fullWidth
                                     id="standard-required"
                                     label="Office Phone"
-                                    margin="nromal"
+                                    margin="none"
                                 />
                             </p>
                             <p className='adduser input cphone'>
@@ -227,7 +234,7 @@ class App extends React.Component{
                                     fullWidth
                                     id="standard-required"
                                     label="Cell Phone"
-                                    margin="nromal"
+                                    margin="none"
                                 />
                             </p>
                             <p className='adduser input SMS'>
@@ -239,7 +246,7 @@ class App extends React.Component{
                                     fullWidth
                                     id="standard-required"
                                     label="SMS"
-                                    margin="nromal"
+                                    margin="none"
                                 />
                             </p>
                             <p className='adduser input Email'>
@@ -251,7 +258,7 @@ class App extends React.Component{
                                     fullWidth
                                     id="standard-required"
                                     label="Email"
-                                    margin="nromal"
+                                    margin="none"
                                 />
                             </p>
                             <p className='adduser input manager'>
@@ -318,13 +325,13 @@ const mapStateToProps = state =>{
 const mapDispatchToProps = dispatch =>{
     return {
     updateUser:(id,name,title,sex,sdate,ophone,cphone,sms,email,uploadedFileCloudinaryUrl,managerid,props)=>{
-        dispatch(updateUser(id,name,title,sex,sdate,ophone,cphone,sms,email,uploadedFileCloudinaryUrl,managerid,props))
+        dispatch(updateUser(id,name,title,sex,sdate,ophone,cphone,sms,email,uploadedFileCloudinaryUrl,managerid,props));
     },
     getManagerList: (id) => {
         dispatch(getManagerList(id));
     },
     getEmployeeDetail:(id)=>{
-        dispatch(getDetail(id))
+        dispatch(getDetail(id));
     }
     }
 }

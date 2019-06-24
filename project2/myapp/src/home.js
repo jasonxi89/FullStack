@@ -27,16 +27,19 @@ class Home extends React.Component{
         return false;
     }
 
-    changeFilter = (str)=>{
-        this.setState({filter:str})
-    }
+    // changeFilter = (str)=>{
+    //     this.setState({filter:str})
+    // }
 
     handleEdit = (id)=>{
         console.log(id)
         console.log(this.props)
         this.props.history.push(`/users/${id}`)
     }
-
+    // <DebounceInput
+    // minLength={2}
+    // debounceTimeout={300}
+    // onChange={event => this.setState({value: event.target.value})} />
     // loadMore =() => {
     //     this.props.getUserList(this.state.page);
     //     console.log(this.state.page)
@@ -44,12 +47,13 @@ class Home extends React.Component{
     // }
 
     render(){
+        // console.log(this.state.filter)
         return(
             <Fragment >
-                <Search props = {this.props} changeFilter = {this.changeFilter}/>
-                <a href="/"><button className='btn-adduser'><i class="iconfont">&#xeb8b;</i>Reset</button></a>
-                <a href="/add"><button className='btn-adduser'><i class="iconfont">&#xeb8b;</i>Create New User</button></a>
-                <WithRouterEnhancedTable loadMore={this.loadMore} handleEdit = {this.handleEdit} />
+                {/* <Search props = {this.props} changeFilter = {this.changeFilter}/> */}
+                {/* <a href="/"><button className='btn-adduser'><i class="iconfont">&#xeb8b;</i>Reset</button></a>
+                <a href="/add"><button className='btn-adduser'><i class="iconfont">&#xeb8b;</i>Create New User</button></a> */}
+                <WithRouterEnhancedTable filter = {this.state.filter} loadMore={this.loadMore} handleEdit = {this.handleEdit} />
             </Fragment>
         )
     }}

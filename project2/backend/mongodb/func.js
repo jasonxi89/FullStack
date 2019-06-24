@@ -216,7 +216,43 @@ async function del(id, res){
 }
 
 
-
+function search(req,res){
+    const searchText = req.body.seachText;
+    if (!searchText) {
+      res.json({matchedText: []});
+    }
+    console.log(searchText)
+    
+    const Config = {
+        $or: [
+            { name: new RegExp(searchText, 'i') },
+            { title:  new RegExp(searchText, 'i') },
+            { ophone:  new RegExp(searchText, 'i')},
+            { cphone:  new RegExp(searchText, 'i') },
+            { sms:  new RegExp(searchText, 'i') },
+            { email: new RegExp(searchText, 'i')},
+        ]
+    }
+    User.find({
+        $or: [ { name: new RegExp(searchText, 'i')},
+                { title:  new RegExp(searchText, 'i')},
+                { ophone:  new RegExp(searchText, 'i')},
+                { cphone:  new RegExp(searchText, 'i')},
+                { sms:  new RegExp(searchText, 'i') },
+                { email: new RegExp(searchText, 'i')}
+                ]
+    }, function (err, matchedResult) {
+        res.json(matchedResult)
+    })
+    // User.find()
+    // .or([{ name: new RegExp(searchText, 'i') },
+    //     { title:  new RegExp(searchText, 'i') },
+    //     { ophone:  new RegExp(searchText, 'i')},
+    //     { cphone:  new RegExp(searchText, 'i') },
+    //     { sms:  new RegExp(searchText, 'i') },
+    //     { email: new RegExp(searchText, 'i')},])
+    // .then(user=>res.json(user))
+}
 module.exports = {
     find,     //find one
     findall,  //find all
@@ -226,6 +262,7 @@ module.exports = {
     findDrnum, //find Dr Num
     update,   //update
     del,      //delete
+    search,
     // test,
     // findasyn,
     // findpromise,

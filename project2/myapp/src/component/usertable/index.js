@@ -6,7 +6,9 @@ import Row from './row'
 import imgSrc from '../../default.jpg'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import{ getList, getDetail, delUser,} from '../../redux/actions';
+import Search from '../search'
+
+// import{ getList, getDetail, delUser,} from '../../redux/actions';
 
 
 
@@ -25,6 +27,7 @@ class Scroll2 extends Component {
       pageNum: 0,
       data: [],
       isLoading:false,
+      filter:"",
     };
   }
   // componentDidUpdate() {
@@ -96,6 +99,7 @@ class Scroll2 extends Component {
   handleEdit(id){
     this.props.history.push(`/users/${id}`)
   }
+  
   async handleDelete(id){
     this.setState({isLoading:true})
     await axios.delete(`http://localhost:8888/api/users/${id}`)
@@ -111,68 +115,95 @@ class Scroll2 extends Component {
   
 
   componentDidMount(){
-    this.initialData();
+    this.getData();
   }
-  getData(){
-    this.setState({isLoading:true})
-    axios
-    .get(`http://localhost:8888/api/users/?page=0`)
-    .then(res => {
-      if(res.data.length < 20){
-        this.setState({data:res.data,hasMore:false,isLoading:false})
-        return
-      }
-      this.setState({data:res.data,loading:false,isLoading:false})
-      // console.log(this.state.data)
-    })
-    .catch(err => {
+
+  searchData = (searchTextValue) =>{
+    this.setState({loading:true})
+    axios.post(`http://localhost:8888/api/users/search`, {
+      "seachText": searchTextValue
+    }).then(res=>{
+      console.log(res)
+      this.setState({data:res.data,loading:false,hasMore:false})
+    }).catch(err => {
       console.log(err)
     });
   }
 
+  getData(){
+    this.setState({loading:true})
+    if(this.props.filter){
+      this.searchData(this.props.filter)
+    }else{
+    axios
+      .get(`http://localhost:8888/api/users/?page=0`)
+      .then(res => {
+        if(res.data.length < 17){
+          this.setState({data:res.data,hasMore:false,loading:false})
+          return
+        }
+        this.setState({data:res.data,loading:false,isLoading:false})
+        // console.log(this.state.data)
+      })
+      .catch(err => {
+        console.log(err)
+      });}
+  }
+
   initialData (page){
     axios
-          .get(`http://localhost:8888/api/users/?page=${page?page:0}`)
-          .then(res => {
-            if(res.data.length < 20){
-              this.setState({data:this.state.data.concat(res.data),hasMore:false})
-              return
-            }
-            this.setState({data:this.state.data.concat(res.data),loading:false})
-          })
-          .catch(err => {
-            console.log(err)
-          });
+        .get(`http://localhost:8888/api/users/?page=${page?page:0}`)
+        .then(res => {
+          console.log(res.data)
+          console.log(this.state.data)
+          if(res.data.length < 17){
+            this.setState({data:this.state.data.concat(res.data),hasMore:false})
+          }else{
+          this.setState({data:this.state.data.concat(res.data),loading:false})}
+        })
+        .catch(err => {
+          console.log(err)
+        });
   }
   
   loadMore(){
     if (this.state.loading) {
+      console.log("here1")
       return 
     }
+    console.log("here2")
     this.setState({
             loading: true,
             pageNum: this.state.pageNum + 1
         }, () => {
+          console.log(this.state.pageNum)
           this.initialData(this.state.pageNum)
         })
   }
   
-
+  changeFilter = (str)=>{
+    if(str){
+    this.searchData(str)}else{
+      this.getData();
+    }
+  }
 
   render() {
+    console.log(this.props.filter)
     const { total,data} = this.state;
     const {  order, orderBy, selected, rowsPerPage, page } = this.state;
     return (
       <div className="table-ctn-home">   
-        <div style={{ height: "100%", overflow: "auto" }}>  
+        <Search  changeFilter = {this.changeFilter}/>
+        <div style={{  height: "700px", overflow: "auto" }}>  
           <InfiniteScroll
             initialLoad={false}
-            thedshold={250}
+            threshold={100}
             pageStart={0}
             loadMore={this.loadMore.bind(this)}
             hasMore={!this.state.loading && this.state.hasMore}
             loader={<div className="loader"> Loading... </div>}
-            useWindow={true}
+            useWindow={false}
           >
             {this.showItems()}{" "}
             {!this.state.hasMore ? <div className="end-text">Finished</div> : ""}

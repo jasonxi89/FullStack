@@ -25,6 +25,10 @@ router.post('/',(req,res)=>{
     func.insert(req.body, res)
 })
 
+router.post('/search', (req, res) => {
+    func.search(req,res)
+  });
+
 router.get('/dr/:id',(req,res)=>{
     func.findDr(req.params.id,res)
 })
@@ -47,7 +51,7 @@ router.get('/Drnum/:id',(req,res)=>{
 })
 
 router.put('/:id',(req,res)=>{
-    // console.log(req.params.id)
+    console.log(req.params.id)
     // console.log(req.body)
     func.update(req.params.id, req.body, res)
 })

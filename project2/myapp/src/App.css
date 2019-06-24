@@ -16,6 +16,9 @@
   url('//at.alicdn.com/t/font_1198173_nvzkvlodo3f.ttf') format('truetype'),
   url('//at.alicdn.com/t/font_1198173_nvzkvlodo3f.svg#iconfont') format('svg');
 }
+form{
+  height: 100%;
+}
 .iconfont{
   font-family:"iconfont" !important;
   font-size:18px;font-style:normal;
@@ -33,6 +36,8 @@
   padding: 20px;
 }
 .btn-adduser{
+  display: inline-block;
+  float: middle;
   cursor:pointer;
   height: 30px;
   border-radius: 10px;

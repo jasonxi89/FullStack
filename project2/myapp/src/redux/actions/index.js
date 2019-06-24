@@ -228,20 +228,3 @@ const getListRequest = () => {
 
   //-----------------------------------------------------------
 
-export const editPageLoading = () => {
-    return{
-        type: "EDIT_LOADING"
-    }
-}
-export const editPageFail = (error) => {
-    return {
-        type: "EDIT_FAIL",
-        error: error
-    }
-}
-export const editInitSuccess = (data) => {
-    return {
-        type: "EDIT_SUCCESS",
-        data:data
-    }
-}

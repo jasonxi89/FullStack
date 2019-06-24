@@ -18,36 +18,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import request from 'superagent';
 
-
-
-import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
-
-import Button from '@material-ui/core/Button';
-import DeleteIcon from '@material-ui/icons/Delete';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import KeyboardVoiceIcon from '@material-ui/icons/KeyboardVoice';
-import Icon from '@material-ui/core/Icon';
-import SaveIcon from '@material-ui/icons/Save';
-
-
-import FormHelperText from '@material-ui/core/FormHelperText';
-
-
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import ErrorIcon from '@material-ui/icons/Error';
-import InfoIcon from '@material-ui/icons/Info';
-import CloseIcon from '@material-ui/icons/Close';
-import green from '@material-ui/core/colors/green';
-import amber from '@material-ui/core/colors/amber';
-import IconButton from '@material-ui/core/IconButton';
 import Snackbar from '@material-ui/core/Snackbar';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
-import WarningIcon from '@material-ui/icons/Warning';
-import Slide from "@material-ui/core/Slide";
+
 
 import{ createUser } from '../redux/actions';
-import { red700 } from 'material-ui/styles/colors';
+
 
 const CLOUDINARY_UPLOAD_PRESET = 'tice2nsu';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/sach1130/image/upload';
