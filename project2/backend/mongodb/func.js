@@ -53,11 +53,11 @@ function findDr(id,res){
 function insert (data,res){
     if(data.managerid){
         var user = new User({
-            name : data.name,                    
+            name : data.name,
             title : data.title,
             sex: data.sex,
-            sdate: data.sdate,                     
-            ophone: data.ophone,                      
+            sdate: data.sdate,
+            ophone: data.ophone,
             cphone: data.cphone,
             sms: data.sms,
             email: data.email,
@@ -66,11 +66,11 @@ function insert (data,res){
         });
     }else{
         var user = new User({
-            name : data.name,                    
+            name : data.name,
             title : data.title,
             sex: data.sex,
-            sdate: data.sdate,                     
-            ophone: data.ophone,                      
+            sdate: data.sdate,
+            ophone: data.ophone,
             cphone: data.cphone,
             sms: data.sms,
             email: data.email,
@@ -95,7 +95,7 @@ function validmanager(id,res){
             users.forEach(function(user) {
               userMap[user._id] = user.name;
             });
-            res.send(userMap);  
+            res.send(userMap);
 
           });
     }else{
@@ -122,7 +122,7 @@ function validmanager(id,res){
                     }
                 }
             });
-            res.send(userMap);  
+            res.send(userMap);
         });
     }
 }
@@ -178,7 +178,7 @@ function update(id,data,res){
     //     if (!user){res.sendStatus(999)}
     //     else{ res.sendStatus(200) }
     // })}
-    
+
 
 
 
@@ -193,7 +193,7 @@ async function del(id, res){
             //     (err,doc)=>
             //     {console.log("finished")
             //     })}
-       
+
             // User.updateMany({managerid:id},{$unset:{'managerid':''}},false, true)
             //     }
             if(temp){
@@ -222,7 +222,7 @@ function search(req,res){
       res.json({matchedText: []});
     }
     console.log(searchText)
-    
+
     const Config = {
         $or: [
             { name: new RegExp(searchText, 'i') },
@@ -268,5 +268,3 @@ module.exports = {
     // findpromise,
 
 }
-
-

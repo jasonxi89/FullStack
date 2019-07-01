@@ -10,12 +10,6 @@ import Search from '../search'
 
 // import{ getList, getDetail, delUser,} from '../../redux/actions';
 
-
-
-
-
-
-
 class Scroll2 extends Component {
   constructor(props) {
     super(props);
@@ -82,18 +76,18 @@ class Scroll2 extends Component {
   handleManagerClick=(id)=>{
     // if(!id){return}
     // console.log(id);
-    this.setState({isLoading:true})
+    this.setState({loading:true})
     axios.get(`http://localhost:8888/api/users/detail/${id}`)
     .then(res => {
-      this.setState({data:[].concat(res.data),isLoading:false})
+      this.setState({data:[].concat(res.data),loading:false,hasMore:false})
     })
   }
 
   handleDRClick=(id)=>{
-    this.setState({isLoading:true})
+    this.setState({loading:true})
     axios.get(`http://localhost:8888/api/users//Drnum/${id}`)
     .then(res=>{
-      this.setState({data:[].concat(res.data),isLoading:false})
+      this.setState({data:[].concat(res.data),loading:false,hasMore:false})
     })
   }
   handleEdit(id){
@@ -101,7 +95,7 @@ class Scroll2 extends Component {
   }
   
   async handleDelete(id){
-    this.setState({isLoading:true})
+    this.setState({loading:true})
     await axios.delete(`http://localhost:8888/api/users/${id}`)
     .then(res => {
       this.setState({data:[]},this.getData());

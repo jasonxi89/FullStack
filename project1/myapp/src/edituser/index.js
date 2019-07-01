@@ -57,7 +57,7 @@ class App extends React.Component{
                     sexinput:'female',
                     ageinput:'',
                     pwdinput:'',
-                    
+
     }}
     componentDidMount(){
         this.props.getUserDetail(this.props.match.params.id)
@@ -77,10 +77,10 @@ class App extends React.Component{
     async fircheckstatus(str){
         if(str && this.state.secpwdinput === str){
             await this.setState({pwdstatus:true});
-            this.checkstatus(); 
+            this.checkstatus();
         }else{
             await this.setState({pwdstatus:false});
-            this.checkstatus(); 
+            this.checkstatus();
         }
     }
 
@@ -90,7 +90,7 @@ class App extends React.Component{
         if(!isNaN(e.target.value)){
             this.setState({ageinput:e.target.value.trim()})}
     }
-    
+
 
     handleSubmit = (e)=>{
         // fname,lname,pwd,age,sex
@@ -111,13 +111,13 @@ class App extends React.Component{
                 <form onSubmit={this.handleSubmit}>
                     <p><h2>Edit User:</h2></p>
                     <p className='adduser input fname'>
-                        <TextField                
+                        <TextField
                             // value={this.state.fnameinput}
                             defaultValue={this.props.userDetail.data.fname}
                             onChange={e=>this.setState({fnameinput:e.target.value.trim()})}
                             fullWidth
                             label="First Name"
-                            required 
+                            required
                             id="standard-required"
                             placeholder="First Name"
                             margin="normal"
@@ -135,7 +135,7 @@ class App extends React.Component{
                             margin="normal"
                         />
                     </p>
-                    
+
                     <p className='sex adduser input '>
                     <FormControl required component="fieldset" >
                         <FormLabel component="legend">Gender</FormLabel>
@@ -182,12 +182,12 @@ class App extends React.Component{
                     <Button onClick={this.handleClick}
                     className="adduser input btn"  variant="outlined" color='Green' type='submit'>
                         <CloudUploadIcon /> Submit
-                    </Button>:<Button 
+                    </Button>:<Button
                     className="adduser input btn" disabled variant="outlined" color='Green' type='submit'>
                         <CloudUploadIcon /> Submit
                     </Button>
                     }
-                    
+
                     <Snackbar
                         anchorOrigin={{
                             vertical: 'bottom',
